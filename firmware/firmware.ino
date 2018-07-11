@@ -327,6 +327,10 @@ void setup()
   {
     platypus::sensors[i] = &(platypus::Sensor::dummy());
   }
+
+  // BlueBox on s2 by default
+  platypus::sensors[2] = new platypus::BlueBox(2);
+  
   // RC_SBUS on s3 by default (for running the boat without a phone)
   platypus::RC_SBUS * ptemp = new platypus::RC_SBUS(3);
   pRC = ptemp;          
