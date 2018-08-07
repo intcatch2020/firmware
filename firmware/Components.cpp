@@ -1311,8 +1311,21 @@ void RC_SBUS::update()
     }
     else
     {
-      Serial.println(":  DISABLED");
+      Serial.println(":  DISABLED");      
     }
+
+    char output_str[DEFAULT_BUFFER_SIZE + 3];    
+    // send message to phone informing it of the change
+    snprintf(output_str, DEFAULT_BUFFER_SIZE,
+             "{"
+             "\"r%u\":{"
+             "\"over\":\"%d\""
+             "}"
+             "}",
+             channel_,
+             override_enabled
+            );
+    send(output_str);
   }
   thrust_scale = (scaled_channel_values[rc::THRUST_SCALE] + 1.0)/2.0; // 0-1 scale
 }
