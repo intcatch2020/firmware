@@ -238,6 +238,8 @@ namespace platypus
     char * name();
     void loop();
     void onSerial();
+    bool set(const char * param, const char * value);
+    
   };  
 
   class GY26Compass : public SerialSensor

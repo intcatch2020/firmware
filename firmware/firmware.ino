@@ -648,11 +648,19 @@ void serialConsoleLoop()
     } else if (strcmp(debug_buffer, "DOc0") == 0) {
       platypus::sensors[1]->calibrate(0);
     } else if (strcmp(debug_buffer, "PHcm") == 0) {
-      platypus::sensors[2]->calibrate(0.0);
+      platypus::sensors[1]->calibrate(0.0);
     } else if (strcmp(debug_buffer, "PHcl") == 0) {
-      platypus::sensors[2]->calibrate(-1);
+      platypus::sensors[1]->calibrate(-1);
     } else if (strcmp(debug_buffer, "PHch") == 0) {
-      platypus::sensors[2]->calibrate(1);
+      platypus::sensors[1]->calibrate(1);
+    }
+    else if (strcmp(debug_buffer, "BB_PG_ON") == 0)
+    {
+      platypus::sensors[2]->set("flag", "1");
+    }
+    else if (strcmp(debug_buffer, "BB_PG_OFF") == 0)
+    {
+      platypus::sensors[2]->set("flag", "0");
     }
     // Attempt to parse command.
     handleCommand(debug_buffer);

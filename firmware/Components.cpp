@@ -925,6 +925,19 @@ void BlueBox::onSerial(){
     }
 }
 
+bool BlueBox::set(const char* param, const char* value) 
+{
+  // pass key-value onto bluebox via two-way serial
+  char output[DEFAULT_BUFFER_SIZE];
+  snprintf(output, DEFAULT_BUFFER_SIZE,
+    "$PG002,%s,%s\0",
+    param,
+    value
+  );
+  SERIAL_PORTS[channel_]->print(output);
+  Serial.print("set BlueBox AMS variable: "); Serial.println(output);
+}
+
 
 HDS::HDS(int channel)
   : Sensor(channel), PoweredSensor(channel, true), SerialSensor(channel, 4800, RS485)
