@@ -930,7 +930,7 @@ bool BlueBox::set(const char* param, const char* value)
   // pass key-value onto bluebox via two-way serial
   char output[DEFAULT_BUFFER_SIZE];
   snprintf(output, DEFAULT_BUFFER_SIZE,
-    "$PG002,%s,%s\0",
+    "$PGO02,%s,%s",
     param,
     value
   );

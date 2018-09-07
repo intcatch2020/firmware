@@ -656,10 +656,12 @@ void serialConsoleLoop()
     }
     else if (strcmp(debug_buffer, "BB_PG_ON") == 0)
     {
+      Serial.println("BB_PG_ON command received");
       platypus::sensors[2]->set("flag", "1");
     }
     else if (strcmp(debug_buffer, "BB_PG_OFF") == 0)
     {
+      Serial.println("BB_PG_OFF command received");
       platypus::sensors[2]->set("flag", "0");
     }
     // Attempt to parse command.
