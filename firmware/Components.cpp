@@ -925,17 +925,32 @@ void BlueBox::onSerial(){
     }
 }
 
-bool BlueBox::set(const char* param, const char* value) 
+bool BlueBox::set(const char* param, const char* value)
 {
-  // pass key-value onto bluebox via two-way serial
+  // check if value is "-99.99". If it is, only query the parameter.
+  // in any other case, set the parameter
   char output[DEFAULT_BUFFER_SIZE];
-  snprintf(output, DEFAULT_BUFFER_SIZE,
-    "$PGO02,%s,%s",
-    param,
-    value
-  );
+  char get_command[] = "-99.99";
+  if (strcmp(get_command, value) == 0)
+  {
+    snprintf(output, DEFAULT_BUFFER_SIZE,
+      "$PGO02,%s",
+      param
+    );
+    Serial.print("GET ");
+  }
+  else
+  {  
+    // pass key-value onto bluebox via two-way serial    
+    snprintf(output, DEFAULT_BUFFER_SIZE,
+      "$PGO02,%s,%s",
+      param,
+      value
+    );
+    Serial.print("SET ");
+  }
   SERIAL_PORTS[channel_]->print(output);
-  Serial.print("set BlueBox AMS variable: "); Serial.println(output);
+  Serial.print("BlueBox AMS variable: "); Serial.println(output);
 }
 
 
